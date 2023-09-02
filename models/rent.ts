@@ -4,12 +4,12 @@ import {
 } from'sequelize';
 interface rentAttributes {
   bookId	: number;
-  customerId	: number;
+  customerId	: string;
 }
 module.exports = (sequelize: any, DataTypes: any) => {
   class rent extends Model<rentAttributes> implements rentAttributes{
     bookId!: number;
-    customerId!: number;
+    customerId!: string;
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -24,16 +24,14 @@ module.exports = (sequelize: any, DataTypes: any) => {
       bookId:{
         type: DataTypes.INTEGER,
         allowNull: false,
-        unique: true,
         references:{
           model: 'book',
           key : 'id'
         }
       },
       customerId:{
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
         references:{
           model: 'customer',
           key : 'id'

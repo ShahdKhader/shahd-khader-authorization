@@ -3,9 +3,10 @@ import {
   Model
 } from 'sequelize';
 interface customerAttributes {
-  id: number;
+  id: string;
   name: string;
   registrationDate: Date;
+  pass: string;
 }
 module.exports = (sequelize: any, DataTypes: any) => {
   class customer extends Model <customerAttributes> implements customerAttributes{
@@ -14,9 +15,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-  id!: number;
+  id!: string;
   name!: string;
   registrationDate!: Date;
+  pass!: string;
     static associate(models: any) {
       // define association here
       customer.belongsToMany(models.book,{
@@ -27,7 +29,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
   customer.init(
     {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true
     },
@@ -37,6 +39,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
    },
    registrationDate: {
     type: DataTypes.DATE,
+    allowNull: false
+   },
+   pass: {
+    type: DataTypes.STRING,
     allowNull: false
    },
   }, 
